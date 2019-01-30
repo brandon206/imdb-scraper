@@ -49,6 +49,15 @@ function getMovie (imdbID) {
             const genres = $genres.text().match(/^(.*?)\d/)[1].replace(/([a-z])([A-Z])/g, '$1 $2');
             const releaseDate = $('a[title="See more release dates"]').text().trim();
             const imdbRating = $('span[itemProp="ratingValue"]').text();
+            const poster = $('div.poster a img').attr('src');
+            const summary = $('div.summary_text').text().trim();
+            const director = $('.credit_summary_item a').first().text();
+            const writer = $('.credit_summary_item a').slice(1,2).text();
+            const stars = [];
+            const star1 = $('.credit_summary_item a').slice(2).eq(0).text();
+            const star2 = $('.credit_summary_item a').slice(2).eq(1).text();
+            const star3 = $('.credit_summary_item a').slice(2).eq(2).text();
+            stars.push(star1, star2, star3);
 
             return {
                 imdbID,
@@ -57,7 +66,13 @@ function getMovie (imdbID) {
                 runTime,
                 genres,
                 releaseDate,
-                imdbRating
+                imdbRating,
+                poster,
+                summary,
+                director,
+                writer,
+                stars,
+
             }
         });
 }
