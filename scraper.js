@@ -45,10 +45,12 @@ function getMovie (imdbID) {
             const $rating = $('.title_wrapper .subtext');
             const rating = $rating.text().trim().match(/[^|]*/)[0].trim()
 
+            const runTime = $('.subtext time').text().trim();
 
             return {
                 title,
-                rating
+                rating,
+                runTime
             }
         });
 }
