@@ -43,14 +43,21 @@ function getMovie (imdbID) {
             }).text().trim();
 
             const $rating = $('.title_wrapper .subtext');
-            const rating = $rating.text().trim().match(/[^|]*/)[0].trim()
-
+            const rating = $rating.text().trim().match(/[^|]*/)[0].trim();
             const runTime = $('.subtext time').text().trim();
+            const $genres = $('.subtext a');
+            const genres = $genres.text().match(/^(.*?)\d/)[1].replace(/([a-z])([A-Z])/g, '$1 $2');
+            const releaseDate = $('a[title="See more release dates"]').text().trim();
+            const imdbRating = $('span[itemProp="ratingValue"]').text();
 
             return {
+                imdbID,
                 title,
                 rating,
-                runTime
+                runTime,
+                genres,
+                releaseDate,
+                imdbRating
             }
         });
 }
